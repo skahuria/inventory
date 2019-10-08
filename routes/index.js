@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
   var successMsg = req.flash('success')[0];
   Product.find(function(err, docs){
     var productChunks = [];
-    var chunkSize = 6;
+    var chunkSize = 3;
     for (var i = 0; i < docs.length; i += chunkSize){
         productChunks.push(docs.slice(i, i + chunkSize))
     }
@@ -80,8 +80,11 @@ router.post('/checkout', isLoggedIn, function(req, res, next) {
      user: req.user,
      cart: cart,
      name: req.body.name,
+     email: req.body.email,
      department: req.body.department,
-     branch: req.body.branch
+     branch: req.body.branch,
+     timestamp: req.body.timestamp
+     
   });
   order.save(function(err, result){
   var cart = new Cart(req.session.cart);

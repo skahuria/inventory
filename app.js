@@ -19,7 +19,7 @@ var userRoutes = require('./routes/user');
 var app = express();
 
 //mongoose.connect('localhost:27017/inventory');
-mongoose.connect('mongodb://localhost:27017/inventory', { useNewUrlParser: true});
+mongoose.connect('mongodb://localhost:27017/inventory', { useNewUrlParser: true});   
 require('./config/passport');
 
 
@@ -31,7 +31,7 @@ app.set('view engine', '.hbs');
 app.use(logger('dev'));
 app.use(express.json());
 //app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));     
 //app.use(bodyParser.urlencoded({ extended: false}));
 app.use(validator());
 app.use(cookieParser());
