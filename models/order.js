@@ -8,8 +8,9 @@ var schema = new Schema({
     email: {type: String, required: true},
     department: {type: String, required: true},
     branch: {type: String, required: true},
-    date: {type: Date, default: Date.now}
-
+    date: {type: Date, default: Date.now},
+    status: {type: String, default : "New" }
+    
 });
 
 module.exports = mongoose.model('Order', schema);

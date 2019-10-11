@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">     
+    <h2>Orders</h2>
+        {{#each orders}}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <span class="badge">Employee Name:  {{this.name}} : Department - {{this.department}} Branch: {{this.branch}} Email: {{ this.email  }} </span> 
+                
+                <ul class="list-group">                   
+                   {{# each this.items }}                 
+                    <li class="list-group-item">
+                        <span class="badge">{{ this.price  }}</span>
+                            {{ this.item.title}} | {{ this.qty }} Units                                        
+                    </li>   
+                        
+                            
+                     {{/each}}
+                    
+                  </ul>
+                </div>
+                 <span class="badge">{{ this.price  }}</span> 
+             <div class="panel-footer">KES {{ this.cart.totalPrice }} </div>
+             <div class="panel-footer">Status:  {{ this.status }} </div> 
+             <button type="submit" class="btn btn-success">Approve</button>
+             <button type="submit" class="btn btn-success">Decline</button>    
+                
+          </div>
+        {{/each}}
+     </div>
+</div>

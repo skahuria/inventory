@@ -7,7 +7,8 @@ $form.submit(function(event)) {
     name: $('#name').val(),
     email: $('#email').val(),
     department: $('#department').val(),
-    branch: $('#branch').val();
+    branch: $('#branch').val(),
+    status: $('#status').val();
     return false;
 });
 if(response.error){

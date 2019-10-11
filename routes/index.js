@@ -3,7 +3,6 @@ var router = express.Router();
 var Cart = require('../models/cart');
 var Product = require('../models/product');
 var Order = require('../models/order');
-var datetime = new Date();
 
 
 /* GET home page. */
@@ -83,19 +82,34 @@ router.post('/checkout', isLoggedIn, function(req, res, next) {
      email: req.body.email,
      department: req.body.department,
      branch: req.body.branch,
-     timestamp: req.body.timestamp
-     
+     timestamp: req.body.timestamp,
+     status: req.body.status  
+         
   });
+
   order.save(function(err, result){
-  var cart = new Cart(req.session.cart);
   req.flash('success', 'Order has been submitted for Approval');
   req.session.cart = null;
   res.redirect('/');
-
-
   });
 
+});  
+
+
+router.get('/approve', function(req, res, next) {
+  Order.find(function(err, orders){
+    var cart;
+      orders.forEach(function(order) {
+        cart = new Cart(order.cart);
+        order.items = cart.generateArray();   
+      });
+  
+    res.render('approval/approve',{orders : orders});
+  });
 });
+
+
+
 module.exports = router;
 
 function isLoggedIn(req, res, next) {
@@ -106,3 +120,4 @@ function isLoggedIn(req, res, next) {
   res.redirect('/user/signin');
   
 }
+
